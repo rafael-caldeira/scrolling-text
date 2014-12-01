@@ -1,4 +1,10 @@
-
+/*
+ * Este trabalho está licenciado sob uma Licença Creative 
+ * Commons Atribuição 4.0 Internacional. Para ver uma cópia 
+ * desta licença, visite http://creativecommons.org/licenses/by/4.0/.
+ *
+ * Rafael Silva @ 2014
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -79,8 +85,7 @@ char ** ler_ascii(char *path, int *n)	{
 			free(line);
 			break;
 		} else if(plen!=0 && len!=plen)	{ // verifica se o conteudo tem o mesmo nr de caracteres
-			printf("ERRO: A linhas %d tem cumprimento %zu e a linha %d tem cumprimento %zu\n.",i,len,i-1,plen);
-			printf("%d(%.4zu):%s\n",i,strlen(line),line);
+			printf("ERROR:%s: The lines %d and %d differ in length (%zu and %zu)\n.",path,i,i-1,len,plen);
 			return NULL;
 		}
 
@@ -113,6 +118,11 @@ int main()	{
 	awesome = ler_ascii("awesome.txt",&nawesome);
 	site = ler_ascii("site.txt",&nsite);
 	share  = ler_ascii("share.txt",&nshare);
+
+	if(!awesome ||!site ||!share)	{
+		printf("Fail to read a file.\n");
+		return 0;
+	}
 
 	scroll_text(awesome,nawesome,110);
 	scroll_text(site,nsite,110);
